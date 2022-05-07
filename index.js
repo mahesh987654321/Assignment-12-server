@@ -32,6 +32,7 @@ client.connect((err) => {
       });
       app.get("/service/:id", async (req, res) => {
         const id = req.params.id;
+        console.log(id);
         const query = { _id: ObjectId(id) };
         const service = await serviceCollection.findOne(query);
         res.send(service);
@@ -93,5 +94,5 @@ client.connect((err) => {
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`Example appp listening on port ${port}`);
 });
