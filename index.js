@@ -93,5 +93,5 @@ client.connect((err) => {
 });
 
 app.listen(port, () => {
-  console.log(`Example  listening on port ${port}`);
+  console.log(`Example app listening on port ${port}`);
 });
