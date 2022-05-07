@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+var jwt = require("jsonwebtoken");
 const port = process.env.PORT || 5000;
 app.use(express.json());
 require("dotenv").config();
@@ -23,7 +24,13 @@ client.connect((err) => {
       await client.connect();
       const serviceCollection = client.db("laptop").collection("service");
       const orderCollection = client.db("laptop").collection("order");
-
+      app.post("/login", async (req, res) => {
+        const user = req.body;
+        const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+          expiresIn: "30d",
+        });
+        req.send({ accessToken });
+      });
       app.get("/service", async (req, res) => {
         const query = {};
         const cursor = serviceCollection.find(query);
